@@ -1,14 +1,14 @@
 # Your code goes here
 from flask import Flask, request
 app = Flask(__name__)
-#import <cs50.h>
-#
+
+import os
 
 response = ""
 #///creating the methods of communiction
 @app.route('/', methods=['POST', 'GET'])
 def ussd_callback():
-    global unique  = "205"
+    unique = "205"
     global response
     session_id = request.values.get("sessionId", None)#/////getting the session id
     service_code = request.values.get("serviceCode", None)#//////////getting the service code
@@ -24,7 +24,7 @@ def ussd_callback():
 
     elif text == '1':
 
-        response = "CON Kindly input unique ID \n"
+        response = "CON Kindly input unique ID located on the left hand side of your device\n"
         response += "Unique ID \n"
 
 
@@ -40,22 +40,18 @@ def ussd_callback():
         response += "6.Current soil moisture content"
 
     elif text == '2':
-        response ="END your unique ID is " +unique+" kindly go back to main menu press yes then input the unique id "
-        response += "00)main menu"
-
-    elif text == '2*00':
-        response += ussd_callback()
-
+        response ="END your unique ID is located on the Left hand side of your device. Kindly go back to the main menu And input yes then insert that unique ID "
+        
 
     elif text == '1*205*1':
         temperature = '26.5'
-        response = "END Your temperature is " + temperature
+        response = "END Your temperature is " + temperature +" This temperature can sustain your crop and also support crops such as grapes, sukumawiki, sweatpotatoes, peanut"
 
 
 
     elif text == '1*205*2':
         humidity ='68.5'
-        response = "END Your Humidity is " + humidity
+        response = "END Your Humidity is " + humidity+" This humidity is too low for your plants. We suggest you set up a green house around the plant or switch to crops such as fruitnuts, watermellon which can thrive perfectly in our farm under this humidity."
 
     elif text == '1*205*3':
         lght='20%'
@@ -63,7 +59,7 @@ def ussd_callback():
 
     elif text == '1*205*4':
         phval='7'
-        response ="END Your pH is " +phval +" .This means your soil is acidic and capable of growing crops such as tea, coffee, blueberries"
+        response ="END Your pH is " +phval +" .This means your soil is basic and capable of growing crops such as tea, coffee, blueberries"
 
     elif text == '1*205*5':
         fertlvl='50%'
