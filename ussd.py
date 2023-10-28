@@ -72,6 +72,13 @@ def ussd_callback():
 
 
     return response
+
+#Receive response from africas talking
+@app.route('/call', methods=['POST'])
+def call_back_client():
+    return '<Response> <Dial phoneNumbers="" maxDuration="5"/></Response>'
+
+
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=os.environ.get('PORT'))
 
